@@ -22,19 +22,20 @@
     color-scheme: dark;
   }
 
-  /* Dark mode default */
+  /* Dark mode matching Aceternity / Minimal Portfolio reference photo */
   html.dark, :root {
-    --bg-page: #070d17;
-    --bg-surface: #0b1324;
-    --bg-card: #0d182e;
-    --bg-card-hover: #13223f;
-    --border-subtle: #1e2e4f;
-    --border-accent: #06b6d4;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --glow-cyan: rgba(6, 182, 212, 0.15);
-    --glow-blue: rgba(59, 130, 246, 0.15);
+    --bg-page: #000319;
+    --bg-surface: #04071d;
+    --bg-card: #04071d;
+    --bg-card-hover: #0c1033;
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-accent: #cbacf9;
+    --text-primary: #ffffff;
+    --text-secondary: #c1c2d3;
+    --text-muted: #8f90a6;
+    --glow-cyan: rgba(203, 172, 249, 0.2);
+    --glow-blue: rgba(139, 92, 246, 0.2);
+    color-scheme: dark;
   }
 
   /* Functional Light mode matching reference photo (Indigo/Violet Modern Minimalist) */
@@ -62,6 +63,16 @@
     transition: background-color 0.25s ease, color 0.25s ease;
   }
 
+  /* Aceternity signature subtle background grid for Dark Mode */
+  html.dark body, body {
+    background-color: #000319;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 50px 50px;
+    color: #ffffff;
+  }
+
   /* Light mode ambient background gradient */
   html.light body {
     background-color: #f8f7ff;
@@ -73,7 +84,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid #06b6d4;
+    outline: 2px solid #cbacf9;
     outline-offset: 3px;
   }
 
@@ -93,11 +104,11 @@
   }
 }
 
-/* Day09 signature accent bar */
+/* Day09 signature accent bar - Aceternity purple gradient in dark mode */
 .heading-line {
   height: 5px;
   width: 60px;
-  background: linear-gradient(90deg, #06b6d4, #3b82f6);
+  background: linear-gradient(90deg, #cbacf9, #8b5cf6);
   border-radius: 9999px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -107,12 +118,13 @@ html.light .heading-line {
   background: linear-gradient(90deg, #6366f1, #a855f7);
 }
 
-/* Glassmorphic panel matching reference aesthetic */
+/* Glassmorphic panel matching Aceternity dark cards */
 .glass-panel {
-  background: rgba(13, 24, 46, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(30, 46, 79, 0.75);
+  background: rgba(4, 7, 29, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
 /* Crisp, premium white cards in light mode matching reference photo */
@@ -130,8 +142,8 @@ html.light .glass-panel {
 }
 
 .glow-card:hover {
-  border-color: rgba(6, 182, 212, 0.5);
-  box-shadow: 0 0 25px -4px rgba(6, 182, 212, 0.18);
+  border-color: rgba(203, 172, 249, 0.45);
+  box-shadow: 0 0 25px -4px rgba(203, 172, 249, 0.25);
   transform: translateY(-3px);
 }
 
@@ -139,6 +151,283 @@ html.light .glow-card:hover {
   border-color: #818cf8;
   box-shadow: 0 20px 35px -5px rgba(99, 102, 241, 0.14), 0 8px 16px -2px rgba(99, 102, 241, 0.06);
   transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   Dark Mode Design System (Scoped strictly to html.dark)
+   Matches the uploaded reference image ("Minimal Portfolio"):
+   - Deepest space midnight background (#000319)
+   - Subtle geometric grid overlay
+   - Sleek glass cards (#04071d) with crisp borders (rgba(255, 255, 255, 0.1))
+   - Magic Purple / Lavender highlights (#cbacf9)
+   - Refined slate-purple body text (#c1c2d3)
+   ========================================================================== */
+
+/* 1. Dark Typography */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark .text-white {
+  color: #ffffff !important;
+}
+
+html.dark .text-slate-200 {
+  color: #e4ecff !important;
+}
+
+html.dark .text-slate-300 {
+  color: #c1c2d3 !important;
+}
+
+html.dark .text-slate-400 {
+  color: #8f90a6 !important;
+}
+
+html.dark .text-slate-500 {
+  color: #63657b !important;
+}
+
+/* 2. Dark Brand Accents: Magic Purple (#cbacf9) */
+html.dark .text-cyan-400,
+html.dark .text-cyan-300,
+html.dark .text-cyan-500,
+html.dark .text-blue-400,
+html.dark .text-blue-300 {
+  color: #cbacf9 !important;
+}
+
+html.dark .bg-cyan-500\/10,
+html.dark .bg-blue-500\/10,
+html.dark .bg-blue-600\/10 {
+  background-color: rgba(203, 172, 249, 0.1) !important;
+  color: #cbacf9 !important;
+  border-color: rgba(203, 172, 249, 0.25) !important;
+}
+
+html.dark .border-cyan-500\/40,
+html.dark .border-cyan-500\/30,
+html.dark .border-cyan-500\/25,
+html.dark .border-cyan-500\/20,
+html.dark .border-blue-500\/30,
+html.dark .border-blue-500\/20 {
+  border-color: rgba(203, 172, 249, 0.3) !important;
+}
+
+html.dark .bg-cyan-950\/60,
+html.dark .bg-cyan-950\/80 {
+  background-color: #10132e !important;
+  color: #cbacf9 !important;
+  border-color: rgba(203, 172, 249, 0.25) !important;
+}
+
+/* 3. Dark Card & Inner Surfaces */
+html.dark .bg-slate-950,
+html.dark .bg-slate-950\/60,
+html.dark .bg-slate-950\/70,
+html.dark .bg-slate-950\/80,
+html.dark .bg-slate-950\/85 {
+  background-color: rgba(0, 3, 25, 0.9) !important;
+}
+
+html.dark .bg-slate-900,
+html.dark .bg-slate-900\/60,
+html.dark .bg-slate-900\/70,
+html.dark .bg-slate-900\/80,
+html.dark .bg-slate-900\/90 {
+  background-color: #0c1033 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .border-slate-800,
+html.dark .border-slate-800\/80,
+html.dark .border-slate-800\/70,
+html.dark .border-slate-800\/60,
+html.dark .border-slate-900 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 4. Dark Navbar */
+html.dark header.glass-panel {
+  background: rgba(4, 7, 29, 0.85) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark header nav a {
+  color: #c1c2d3 !important;
+}
+
+html.dark header nav a:hover {
+  color: #cbacf9 !important;
+}
+
+html.dark header nav a.border-cyan-400 {
+  color: #cbacf9 !important;
+  border-bottom-color: #cbacf9 !important;
+}
+
+/* 5. Dark Hero Section (Matches "Transforming Concepts into Seamless User Experiences") */
+html.dark #hero .bg-cyan-500\/10 {
+  background-color: rgba(203, 172, 249, 0.15) !important;
+}
+
+html.dark #hero .bg-blue-600\/10 {
+  background-color: rgba(139, 92, 246, 0.15) !important;
+}
+
+html.dark #hero h1 span.bg-clip-text {
+  background: linear-gradient(135deg, #ffffff 10%, #cbacf9 65%, #a855f7 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Aceternity Magic Button */
+html.dark #hero a.bg-gradient-to-r {
+  background: linear-gradient(90deg, #161a31 0%, #0c0e23 100%) !important;
+  border: 1px solid rgba(203, 172, 249, 0.35) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 25px -4px rgba(203, 172, 249, 0.3) !important;
+}
+
+html.dark #hero a.bg-gradient-to-r:hover {
+  background: linear-gradient(90deg, #1e2242 0%, #10132e 100%) !important;
+  border-color: rgba(203, 172, 249, 0.6) !important;
+  box-shadow: 0 0 35px -2px rgba(203, 172, 249, 0.5) !important;
+}
+
+html.dark #hero a.glass-panel {
+  background: rgba(4, 7, 29, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #cbacf9 !important;
+}
+
+html.dark #hero a.glass-panel:hover {
+  border-color: #cbacf9 !important;
+  color: #ffffff !important;
+}
+
+html.dark #hero .bg-gradient-to-br {
+  background: linear-gradient(135deg, rgba(203, 172, 249, 0.25) 0%, rgba(4, 7, 29, 0.9) 50%, rgba(139, 92, 246, 0.25) 100%) !important;
+  border-color: rgba(203, 172, 249, 0.3) !important;
+  box-shadow: 0 0 35px -5px rgba(203, 172, 249, 0.2) !important;
+}
+
+/* 6. Dark Sidebar */
+html.dark aside .w-28,
+html.dark aside .w-32 {
+  background: #04071d !important;
+  border: 2px solid rgba(203, 172, 249, 0.4) !important;
+  box-shadow: 0 0 25px -4px rgba(203, 172, 249, 0.25) !important;
+}
+
+html.dark aside .bg-slate-900\/60 {
+  background-color: #0c1033 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark aside a.text-slate-200 {
+  color: #c1c2d3 !important;
+}
+
+html.dark aside a.text-slate-200:hover {
+  color: #cbacf9 !important;
+}
+
+/* 7. Dark Timeline (Education & Experience) */
+html.dark #education .border-cyan-500\/40 {
+  border-color: rgba(203, 172, 249, 0.3) !important;
+}
+
+html.dark #education .w-4.h-4.rounded-full {
+  background-color: #cbacf9 !important;
+  border-color: #000319 !important;
+  box-shadow: 0 0 14px rgba(203, 172, 249, 0.6) !important;
+}
+
+/* 8. Dark Forms & Inputs */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #0c1033 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+html.dark input:focus,
+html.dark textarea:focus,
+html.dark select:focus {
+  border-color: #cbacf9 !important;
+  box-shadow: 0 0 0 3px rgba(203, 172, 249, 0.2) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #63657b !important;
+}
+
+html.dark form button[type="submit"] {
+  background: linear-gradient(90deg, #161a31 0%, #0c0e23 100%) !important;
+  border: 1px solid rgba(203, 172, 249, 0.4) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px -3px rgba(203, 172, 249, 0.3) !important;
+}
+
+/* 9. Dark Social and Toggle Buttons */
+html.dark .social-link-btn {
+  background-color: #0c1033 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #c1c2d3 !important;
+}
+
+html.dark .social-link-btn:hover {
+  background-color: #151a4a !important;
+  border-color: rgba(203, 172, 249, 0.5) !important;
+  color: #cbacf9 !important;
+  box-shadow: 0 0 15px -3px rgba(203, 172, 249, 0.3) !important;
+}
+
+html.dark .theme-toggle-btn,
+html.dark .language-toggle-btn {
+  background-color: #0c1033 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #c1c2d3 !important;
+}
+
+html.dark .theme-toggle-btn:hover,
+html.dark .language-toggle-btn:hover {
+  border-color: rgba(203, 172, 249, 0.4) !important;
+  color: #cbacf9 !important;
+}
+
+/* 10. Dark Code Blocks */
+html.dark pre,
+html.dark code {
+  background-color: #04071d !important;
+  color: #e4ecff !important;
+}
+
+/* 11. Dark Footer */
+html.dark footer {
+  background-color: #000319 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #8f90a6 !important;
+}
+
+html.dark footer .border-b {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark footer a:hover {
+  color: #cbacf9 !important;
+}
+
+/* 12. Floating Action Button */
+html.dark button.bg-cyan-500 {
+  background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px -3px rgba(168, 85, 247, 0.4) !important;
 }
 
 /* ==========================================================================

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070d17" />
+      <stop offset="100%" stop-color="#0b1324" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bgGrad3)" rx="16" />
+  <rect x="1" y="1" width="798" height="448" fill="none" stroke="#1e2e4f" stroke-width="2" rx="15" />
+
+  <rect x="40" y="35" width="270" height="34" rx="8" fill="#0d182e" stroke="#1e2e4f" />
+  <circle cx="56" cy="52" r="5" fill="#10b981" />
+  <text x="70" y="57" fill="#34d399" font-family="monospace" font-size="14" font-weight="bold">INVESTOR MANAGEMENT APP</text>
+
+  <rect x="610" y="35" width="150" height="30" rx="6" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" />
+  <text x="685" y="55" fill="#34d399" font-family="sans-serif" font-size="12" font-weight="600" text-anchor="middle">FINTECH PORTAL</text>
+
+  <!-- Card 1 -->
+  <rect x="40" y="100" width="210" height="290" rx="12" fill="#0d182e" stroke="#1e2e4f" />
+  <rect x="55" y="115" width="180" height="26" rx="6" fill="#13223f" />
+  <text x="145" y="132" fill="#e2e8f0" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Investor Relations</text>
+  
+  <rect x="55" y="160" width="180" height="80" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="68" y="185" fill="#34d399" font-family="monospace" font-size="11">Categorized Tiers</text>
+  <text x="68" y="205" fill="#94a3b8" font-family="sans-serif" font-size="11">&bull; Angel Investors</text>
+  <text x="68" y="225" fill="#94a3b8" font-family="sans-serif" font-size="11">&bull; VC Funds &bull; Family Offices</text>
+
+  <rect x="55" y="260" width="180" height="80" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="68" y="285" fill="#34d399" font-family="monospace" font-size="11">Contact Ledger</text>
+  <text x="68" y="305" fill="#94a3b8" font-family="sans-serif" font-size="11">Commitment updates</text>
+  <text x="68" y="325" fill="#94a3b8" font-family="sans-serif" font-size="11">Quarterly circulars</text>
+
+  <!-- Connectors -->
+  <path d="M 250 245 L 300 245" stroke="#34d399" stroke-width="2" stroke-dasharray="4 4" />
+  <polygon points="300,245 292,240 292,250" fill="#34d399" />
+
+  <!-- Card 2 -->
+  <rect x="300" y="100" width="210" height="290" rx="12" fill="#0d182e" stroke="#10b981" />
+  <rect x="315" y="115" width="180" height="26" rx="6" fill="#13223f" />
+  <text x="405" y="132" fill="#34d399" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Capital Ledger Engine</text>
+
+  <rect x="315" y="160" width="180" height="80" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="328" y="185" fill="#34d399" font-family="monospace" font-size="11">Shareholding Dilution</text>
+  <text x="328" y="205" fill="#94a3b8" font-family="sans-serif" font-size="11">Precise math modeling</text>
+  <text x="328" y="225" fill="#94a3b8" font-family="sans-serif" font-size="11">Option pool tracking</text>
+
+  <rect x="315" y="260" width="180" height="80" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="328" y="285" fill="#34d399" font-family="monospace" font-size="11">Tranche Allocations</text>
+  <text x="328" y="305" fill="#94a3b8" font-family="sans-serif" font-size="11">Disbursement milestone log</text>
+  <text x="328" y="325" fill="#94a3b8" font-family="sans-serif" font-size="11">Bank reference receipts</text>
+
+  <!-- Connectors -->
+  <path d="M 510 245 L 560 245" stroke="#34d399" stroke-width="2" stroke-dasharray="4 4" />
+  <polygon points="560,245 552,240 552,250" fill="#34d399" />
+
+  <!-- Card 3 -->
+  <rect x="560" y="100" width="200" height="290" rx="12" fill="#0d182e" stroke="#1e2e4f" />
+  <rect x="575" y="115" width="170" height="26" rx="6" fill="#13223f" />
+  <text x="660" y="132" fill="#e2e8f0" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Audit &amp; Reporting</text>
+
+  <rect x="575" y="160" width="170" height="80" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="588" y="185" fill="#60a5fa" font-family="monospace" font-size="11">Audit Trail</text>
+  <text x="588" y="205" fill="#94a3b8" font-family="sans-serif" font-size="11">Immutable timestamping</text>
+  <text x="588" y="225" fill="#94a3b8" font-family="sans-serif" font-size="11">Authorized role changes</text>
+
+  <rect x="575" y="260" width="170" height="80" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="588" y="285" fill="#60a5fa" font-family="monospace" font-size="11">Export Engine</text>
+  <text x="588" y="305" fill="#94a3b8" font-family="sans-serif" font-size="11">Formatted PDF cap tables</text>
+  <text x="588" y="325" fill="#94a3b8" font-family="sans-serif" font-size="11">CSV ledger exports</text>
+</svg>

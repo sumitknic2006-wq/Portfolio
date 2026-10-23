@@ -1,89 +1,172 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Code2, Menu, X, Sparkles, Terminal } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Terminal, Menu, X, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext.jsx';
+import ThemeToggle from '../common/ThemeToggle.jsx';
+import LanguageToggle from '../common/LanguageToggle.jsx';
+import { profileData } from '../../data/profileData.js';
 
-/**
- * Responsive Navigation Header
- * Planned sections: About, Skills, Projects, DSA, Achievements, Contact
- */
 export default function Navbar() {
+  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
+  const location = useLocation();
+
+  const isHome = location.pathname === '/';
 
   const navItems = [
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'DSA & C++', href: '#dsa' },
-    { name: 'Achievements', href: '#achievements' },
-    { name: 'Contact', href: '#contact' },
+    { name: t('nav.home'), href: '#hero', id: 'hero' },
+    { name: t('nav.about'), href: '#about', id: 'about' },
+    { name: t('nav.skills'), href: '#skills', id: 'skills' },
+    { name: t('nav.projects'), href: '#projects', id: 'projects' },
+    { name: t('nav.achievements'), href: '#achievements', id: 'achievements' },
+    { name: t('nav.dsa'), href: '#dsa', id: 'dsa' },
+    { name: t('nav.education'), href: '#education', id: 'education' },
+    { name: t('nav.contact'), href: '#contact', id: 'contact' },
   ];
 
+  // Scroll spy to highlight active section on the homepage
+  useEffect(() => {
+    if (!isHome) return;
+
+    const handleScroll = () => {
+      const sections = ['hero', 'about', 'skills', 'projects', 'achievements', 'dsa', 'education', 'contact'];
+      const scrollPos = window.scrollY + 200;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.offsetTop <= scrollPos) {
+          setActiveSection(sections[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHome]);
+
+  const handleNavClick = (href) => {
+    setMobileMenuOpen(false);
+    if (!isHome) {
+      window.location.href = `/${href}`;
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-50 w-full glass-panel border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-50 w-full glass-panel border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Brand / Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="p-2 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:border-cyan-400 transition-colors">
+        <Link to="/" className="flex items-center gap-2.5 group shrink-0">
+          <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 group-hover:border-cyan-400 group-hover:scale-105 transition-all">
             <Terminal className="w-5 h-5" />
           </div>
           <div>
-            <span className="font-bold text-base tracking-tight text-white group-hover:text-cyan-300 transition-colors">
-              Sumit Kumar
+            <span className="font-extrabold text-base tracking-tight text-white group-hover:text-cyan-300 transition-colors">
+              {profileData.name}
             </span>
-            <span className="hidden sm:inline-block ml-2 text-xs text-slate-400 font-mono">
-              / SAGE University
+            <span className="hidden sm:inline-block ml-2 text-[11px] text-slate-400 font-mono">
+              / SAGE Univ
             </span>
           </div>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-6" aria-label="Main Navigation">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className="text-sm font-medium text-slate-300 hover:text-cyan-400 transition-colors"
-            >
-              {item.name}
-            </a>
-          ))}
-          <a
-            href="/files/README.md"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-3.5 py-1.5 rounded-md text-xs font-semibold bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all shadow-sm shadow-cyan-500/10"
-          >
-            Resume
-          </a>
+        <nav className="hidden xl:flex items-center gap-5" aria-label="Main Navigation">
+          {navItems.map((item) => {
+            const isActive = isHome && activeSection === item.id;
+            return (
+              <a
+                key={item.id}
+                href={item.href}
+                onClick={() => handleNavClick(item.href)}
+                className={`text-xs font-medium transition-colors ${
+                  isActive
+                    ? 'text-cyan-400 font-bold border-b-2 border-cyan-400 pb-1'
+                    : 'text-slate-300 hover:text-cyan-300'
+                }`}
+              >
+                {item.name}
+              </a>
+            );
+          })}
         </nav>
 
-        {/* Mobile menu toggle button */}
-        <div className="flex md:hidden">
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none"
-            aria-label="Toggle navigation menu"
-            aria-expanded={mobileMenuOpen}
+        {/* Controls: Language, Theme, CTAs */}
+        <div className="flex items-center gap-2.5">
+          <LanguageToggle />
+          <ThemeToggle />
+
+          <a
+            href={profileData.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all shadow-sm"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            {t('nav.resume')}
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+
+          <a
+            href="#contact"
+            onClick={() => handleNavClick('#contact')}
+            className="hidden md:inline-flex items-center px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 hover:from-cyan-400 hover:to-blue-500 transition-all shadow-sm shadow-cyan-500/20"
+          >
+            {t('nav.contactMe')}
+          </a>
+
+          {/* Mobile hamburger button */}
+          <div className="flex xl:hidden">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white focus:outline-none"
+              aria-label="Toggle navigation drawer"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile menu drawer */}
+      {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-slate-800 bg-slate-950 px-4 pt-2 pb-4 space-y-1">
-          {navItems.map((item) => (
+        <div className="xl:hidden border-b border-slate-800 bg-slate-950/95 px-4 pt-3 pb-5 space-y-2 backdrop-blur-lg">
+          <div className="grid grid-cols-2 gap-1.5 pb-3 border-b border-slate-800/80">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={item.href}
+                onClick={() => handleNavClick(item.href)}
+                className={`px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                  activeSection === item.id
+                    ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-bold'
+                    : 'text-slate-300 hover:bg-slate-900 hover:text-white'
+                }`}
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+
+          <div className="pt-2 flex flex-col gap-2">
             <a
-              key={item.name}
-              href={item.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-900"
+              href={profileData.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold bg-cyan-500/10 border border-cyan-500/30 text-cyan-300"
             >
-              {item.name}
+              {t('nav.resume')} <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
-          ))}
+            <a
+              href="#contact"
+              onClick={() => handleNavClick('#contact')}
+              className="w-full inline-flex items-center justify-center py-2 rounded-lg text-xs font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-bold"
+            >
+              {t('nav.contactMe')}
+            </a>
+          </div>
         </div>
       )}
     </header>

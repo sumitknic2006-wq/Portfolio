@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070d17" />
+      <stop offset="100%" stop-color="#0b1324" />
+    </linearGradient>
+    <filter id="glow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bgGrad2)" rx="16" />
+  <rect x="1" y="1" width="798" height="448" fill="none" stroke="#1e2e4f" stroke-width="2" rx="15" />
+
+  <rect x="40" y="35" width="250" height="34" rx="8" fill="#0d182e" stroke="#1e2e4f" />
+  <circle cx="56" cy="52" r="5" fill="#3b82f6" />
+  <text x="70" y="57" fill="#38bdf8" font-family="monospace" font-size="14" font-weight="bold">STOCKSAATHI AI PIPELINE</text>
+
+  <rect x="590" y="35" width="170" height="30" rx="6" fill="rgba(59, 130, 246, 0.15)" stroke="#3b82f6" />
+  <text x="675" y="55" fill="#60a5fa" font-family="sans-serif" font-size="12" font-weight="600" text-anchor="middle">AI / RETAIL EXPLORATION</text>
+
+  <!-- Box 1: Retail Data Ingestion -->
+  <rect x="40" y="100" width="210" height="290" rx="12" fill="#0d182e" stroke="#1e2e4f" />
+  <rect x="55" y="115" width="180" height="26" rx="6" fill="#13223f" />
+  <text x="145" y="132" fill="#e2e8f0" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Retail Telemetry Input</text>
+  
+  <rect x="55" y="155" width="180" height="65" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="68" y="180" fill="#38bdf8" font-family="monospace" font-size="11">Sales Velocity Ledger</text>
+  <text x="68" y="200" fill="#94a3b8" font-family="sans-serif" font-size="11">Days-on-shelf tracking</text>
+
+  <rect x="55" y="235" width="180" height="65" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="68" y="260" fill="#38bdf8" font-family="monospace" font-size="11">Stagnant Stock Tagging</text>
+  <text x="68" y="280" fill="#94a3b8" font-family="sans-serif" font-size="11">Threshold warnings</text>
+
+  <rect x="55" y="315" width="180" height="55" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="68" y="340" fill="#38bdf8" font-family="monospace" font-size="11">Local Shop Interface</text>
+  <text x="68" y="358" fill="#94a3b8" font-family="sans-serif" font-size="11">Clean Hindi/Eng views</text>
+
+  <!-- Connectors -->
+  <path d="M 250 245 L 300 245" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 4" />
+  <polygon points="300,245 292,240 292,250" fill="#38bdf8" />
+
+  <!-- Box 2: Analysis & AI -->
+  <rect x="300" y="100" width="220" height="290" rx="12" fill="#0d182e" stroke="#3b82f6" filter="url(#glow2)" stroke-opacity="0.6" />
+  <rect x="315" y="115" width="190" height="26" rx="6" fill="#13223f" />
+  <text x="410" y="132" fill="#60a5fa" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Predictive Recovery Core</text>
+
+  <rect x="315" y="155" width="190" height="65" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="328" y="180" fill="#60a5fa" font-family="monospace" font-size="11">Dead Stock Scoring</text>
+  <text x="328" y="200" fill="#94a3b8" font-family="sans-serif" font-size="11">Holding cost calculation</text>
+
+  <rect x="315" y="235" width="190" height="65" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="328" y="260" fill="#60a5fa" font-family="monospace" font-size="11">Dynamic Clearance Window</text>
+  <text x="328" y="280" fill="#94a3b8" font-family="sans-serif" font-size="11">Seasonality projection</text>
+
+  <rect x="315" y="315" width="190" height="55" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="328" y="340" fill="#60a5fa" font-family="monospace" font-size="11">Prompt Tuning Layer</text>
+  <text x="328" y="358" fill="#94a3b8" font-family="sans-serif" font-size="11">Tailored retail copy</text>
+
+  <!-- Connectors -->
+  <path d="M 520 245 L 560 245" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4 4" />
+  <polygon points="560,245 552,240 552,250" fill="#3b82f6" />
+
+  <!-- Box 3: Output Strategy -->
+  <rect x="560" y="100" width="200" height="290" rx="12" fill="#0d182e" stroke="#1e2e4f" />
+  <rect x="575" y="115" width="170" height="26" rx="6" fill="#13223f" />
+  <text x="660" y="132" fill="#e2e8f0" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Retail Actions</text>
+
+  <rect x="575" y="160" width="170" height="65" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="588" y="185" fill="#f59e0b" font-family="monospace" font-size="11">Discount Schedules</text>
+  <text x="588" y="205" fill="#94a3b8" font-family="sans-serif" font-size="11">10% / 25% / 40% ladders</text>
+
+  <rect x="575" y="240" width="170" height="65" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="588" y="265" fill="#f59e0b" font-family="monospace" font-size="11">Bundling Suggestions</text>
+  <text x="588" y="285" fill="#94a3b8" font-family="sans-serif" font-size="11">Pair with fast movers</text>
+
+  <rect x="575" y="320" width="170" height="55" rx="6" fill="#070d17" stroke="#1e2e4f" />
+  <text x="588" y="345" fill="#f59e0b" font-family="monospace" font-size="11">WhatsApp / SMS Copy</text>
+  <text x="588" y="360" fill="#94a3b8" font-family="sans-serif" font-size="11">Clearance marketing text</text>
+</svg>

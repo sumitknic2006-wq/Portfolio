@@ -42,7 +42,7 @@ export default function SocialLinks({ className = '', showLabels = false }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${item.name} Profile`}
-              className={`p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 ${item.color} transition-all hover:scale-[1.02] active:scale-[0.98] inline-flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400`}
+              className={`social-link-btn p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 ${item.color} transition-all hover:scale-[1.02] active:scale-[0.98] inline-flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400`}
               title={`${item.name} - Sumit Kumar`}
             >
               <Icon className="w-4 h-4 shrink-0" />
@@ -65,7 +65,7 @@ export default function SocialLinks({ className = '', showLabels = false }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${item.name} Profile`}
-            className={`p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-400 ${item.color} transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400`}
+            className={`social-link-btn p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-400 ${item.color} transition-all hover:scale-105 active:scale-95 inline-flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400`}
             title={`${item.name} - Sumit Kumar`}
           >
             <Icon className="w-4 h-4" />

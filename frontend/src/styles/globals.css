@@ -37,19 +37,19 @@
     --glow-blue: rgba(59, 130, 246, 0.15);
   }
 
-  /* Functional Light mode with accessible contrast */
+  /* Functional Light mode matching reference photo (Indigo/Violet Modern Minimalist) */
   html.light {
-    --bg-page: #f1f5f9;
+    --bg-page: #f8f7ff;
     --bg-surface: #ffffff;
     --bg-card: #ffffff;
-    --bg-card-hover: #f8fafc;
-    --border-subtle: #cbd5e1;
-    --border-accent: #0284c7;
+    --bg-card-hover: #faf9ff;
+    --border-subtle: #e0e7ff;
+    --border-accent: #6366f1;
     --text-primary: #0f172a;
-    --text-secondary: #334155;
+    --text-secondary: #475569;
     --text-muted: #64748b;
-    --glow-cyan: rgba(2, 132, 199, 0.12);
-    --glow-blue: rgba(37, 99, 235, 0.12);
+    --glow-cyan: rgba(99, 102, 241, 0.15);
+    --glow-blue: rgba(139, 92, 246, 0.15);
     color-scheme: light;
   }
 
@@ -62,8 +62,23 @@
     transition: background-color 0.25s ease, color 0.25s ease;
   }
 
+  /* Light mode ambient background gradient */
+  html.light body {
+    background-color: #f8f7ff;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(129, 140, 248, 0.04) 0px, transparent 55%);
+    color: #0f172a;
+  }
+
   :focus-visible {
     outline: 2px solid #06b6d4;
+    outline-offset: 3px;
+  }
+
+  html.light :focus-visible {
+    outline: 2px solid #6366f1;
     outline-offset: 3px;
   }
 }
@@ -88,6 +103,10 @@
   margin-bottom: 20px;
 }
 
+html.light .heading-line {
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+}
+
 /* Glassmorphic panel matching reference aesthetic */
 .glass-panel {
   background: rgba(13, 24, 46, 0.7);
@@ -96,11 +115,13 @@
   border: 1px solid rgba(30, 46, 79, 0.75);
 }
 
+/* Crisp, premium white cards in light mode matching reference photo */
 html.light .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(203, 213, 225, 0.85);
+  background: #ffffff;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid #e0e7ff;
+  box-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.07), 0 4px 12px -2px rgba(99, 102, 241, 0.03);
 }
 
 /* Glow card effects */
@@ -114,7 +135,310 @@ html.light .glass-panel {
   transform: translateY(-3px);
 }
 
+html.light .glow-card:hover {
+  border-color: #818cf8;
+  box-shadow: 0 20px 35px -5px rgba(99, 102, 241, 0.14), 0 8px 16px -2px rgba(99, 102, 241, 0.06);
+  transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   Light Mode Design System (Scoped strictly to html.light)
+   Matches the uploaded reference image:
+   - Soft lavender-tinted background (#f8f7ff)
+   - Pristine white cards with subtle indigo borders (#e0e7ff)
+   - Deep slate typography (#0f172a, #475569)
+   - Vibrant royal indigo/violet accents (#6366f1, #7c3aed, #a855f7)
+   - Refined pill tags, modern input fields, polished shadows
+   ========================================================================== */
+
+/* 1. Typography */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light .text-white,
+html.light .text-slate-100 {
+  color: #0f172a !important;
+}
+
+html.light .text-slate-200 {
+  color: #1e293b !important;
+}
+
+html.light .text-slate-300 {
+  color: #475569 !important;
+}
+
+html.light .text-slate-400 {
+  color: #64748b !important;
+}
+
+html.light .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+/* 2. Brand Accent Colors: Cyan -> Indigo/Violet in Light Theme */
+html.light .text-cyan-400,
+html.light .text-cyan-300,
+html.light .text-cyan-500,
+html.light .text-blue-400,
+html.light .text-blue-300 {
+  color: #6366f1 !important;
+}
+
+html.light .bg-cyan-500\/10,
+html.light .bg-blue-500\/10,
+html.light .bg-blue-600\/10 {
+  background-color: #eef2ff !important;
+  color: #6366f1 !important;
+  border-color: #e0e7ff !important;
+}
+
+html.light .border-cyan-500\/40,
+html.light .border-cyan-500\/30,
+html.light .border-cyan-500\/25,
+html.light .border-cyan-500\/20,
+html.light .border-blue-500\/30,
+html.light .border-blue-500\/20 {
+  border-color: #e0e7ff !important;
+}
+
+html.light .bg-cyan-950\/60,
+html.light .bg-cyan-950\/80 {
+  background-color: #f5f3ff !important;
+  color: #6366f1 !important;
+  border-color: #ede9fe !important;
+}
+
+/* 3. Surface & Nested Container Inversion */
+html.light .bg-slate-900\/60,
+html.light .bg-slate-900\/70,
+html.light .bg-slate-900\/80,
+html.light .bg-slate-900\/90,
+html.light .bg-slate-900,
+html.light .bg-slate-950\/60,
+html.light .bg-slate-950\/70,
+html.light .bg-slate-950\/80,
+html.light .bg-slate-950\/85,
+html.light .bg-slate-950 {
+  background-color: #f8f7ff !important;
+}
+
+html.light .border-slate-800,
+html.light .border-slate-800\/80,
+html.light .border-slate-800\/70,
+html.light .border-slate-800\/60,
+html.light .border-slate-900 {
+  border-color: #ede9fe !important;
+}
+
+/* 4. Navbar In Light Mode */
+html.light header.glass-panel {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid #e0e7ff !important;
+  box-shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.05) !important;
+}
+
+html.light header nav a {
+  color: #475569 !important;
+}
+
+html.light header nav a:hover {
+  color: #6366f1 !important;
+}
+
+html.light header nav a.border-cyan-400 {
+  color: #6366f1 !important;
+  border-bottom-color: #6366f1 !important;
+}
+
+/* 5. Hero Section Light Styling */
+html.light #hero .bg-cyan-500\/10 {
+  background-color: rgba(99, 102, 241, 0.12) !important;
+}
+
+html.light #hero .bg-blue-600\/10 {
+  background-color: rgba(168, 85, 247, 0.12) !important;
+}
+
+html.light #hero h1 span.bg-clip-text {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+html.light #hero a.bg-gradient-to-r {
+  background: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 25px -3px rgba(99, 102, 241, 0.35) !important;
+}
+
+html.light #hero a.bg-gradient-to-r:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #6d28d9 100%) !important;
+  box-shadow: 0 14px 28px -3px rgba(99, 102, 241, 0.45) !important;
+}
+
+html.light #hero a.glass-panel {
+  background: #ffffff !important;
+  border: 1.5px solid #e0e7ff !important;
+  color: #4f46e5 !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.08) !important;
+}
+
+html.light #hero a.glass-panel:hover {
+  background: #f5f3ff !important;
+  border-color: #c7d2fe !important;
+  color: #4338ca !important;
+}
+
+/* 6. Sidebar (Sticky Profile Card) */
+html.light aside .w-28,
+html.light aside .w-32 {
+  background: #ffffff !important;
+  border: 2px solid #a5b4fc !important;
+  box-shadow: 0 8px 24px -4px rgba(99, 102, 241, 0.25) !important;
+}
+
+html.light aside .bg-slate-900\/60 {
+  background-color: #f8f7ff !important;
+  border: 1px solid #ede9fe !important;
+}
+
+html.light aside a.text-slate-200 {
+  color: #1e293b !important;
+}
+
+html.light aside a.text-slate-200:hover {
+  color: #6366f1 !important;
+}
+
+/* 7. Timeline / Education & Experience */
+html.light #education .border-cyan-500\/40 {
+  border-color: #c7d2fe !important;
+}
+
+html.light #education .w-4.h-4.rounded-full {
+  background-color: #6366f1 !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25) !important;
+}
+
+/* 8. Forms & Inputs */
+html.light input,
+html.light textarea,
+html.light select {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light input:focus,
+html.light textarea:focus,
+html.light select:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+html.light form button[type="submit"] {
+  background: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* 9. Difficulty and Status Tags */
+html.light .bg-emerald-950\/60,
+html.light .bg-emerald-950\/80 {
+  background-color: #ecfdf5 !important;
+  color: #059669 !important;
+  border-color: #a7f3d0 !important;
+}
+
+html.light .bg-amber-950\/60,
+html.light .bg-amber-950\/80 {
+  background-color: #fffbeb !important;
+  color: #d97706 !important;
+  border-color: #fde68a !important;
+}
+
+html.light .bg-rose-950\/60,
+html.light .bg-rose-950\/80 {
+  background-color: #fff1f2 !important;
+  color: #e11d48 !important;
+  border-color: #fecdd3 !important;
+}
+
+/* 10. Code & Syntax Blocks */
+html.light pre,
+html.light code {
+  background-color: #f5f4fd !important;
+  color: #1e1b4b !important;
+}
+
+/* 11. Footer */
+html.light footer {
+  background-color: #f5f4fd !important;
+  border-top: 1px solid #e0e7ff !important;
+  color: #64748b !important;
+}
+
+html.light footer .border-b {
+  border-bottom-color: #e0e7ff !important;
+}
+
+html.light footer a:hover {
+  color: #6366f1 !important;
+}
+
+/* 12. Floating Action & Buttons */
+html.light button.bg-cyan-500 {
+  background: linear-gradient(135deg, #6366f1 0%, #7c3aed 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.35) !important;
+}
+
+html.light .social-link-btn {
+  background-color: #ffffff !important;
+  border: 1px solid #e0e7ff !important;
+  color: #6366f1 !important;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.05) !important;
+}
+
+html.light .social-link-btn:hover {
+  background-color: #f5f3ff !important;
+  border-color: #c7d2fe !important;
+  color: #4f46e5 !important;
+}
+
+html.light .theme-toggle-btn,
+html.light .language-toggle-btn {
+  background-color: #ffffff !important;
+  border: 1px solid #e0e7ff !important;
+  color: #475569 !important;
+  box-shadow: 0 1px 3px rgba(99, 102, 241, 0.05) !important;
+}
+
+html.light .theme-toggle-btn:hover,
+html.light .language-toggle-btn:hover {
+  background-color: #f5f3ff !important;
+  border-color: #c7d2fe !important;
+  color: #6366f1 !important;
+}
+
+html.light .theme-toggle-btn svg,
+html.light .language-toggle-btn svg {
+  color: #6366f1 !important;
+}
+
 /* Smooth code block styling */
 pre code {
   font-family: var(--font-mono);
 }
+

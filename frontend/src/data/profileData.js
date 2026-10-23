@@ -21,4 +21,20 @@ export const profileData = {
   },
   careerObjective:
     'Dedicated computer science undergraduate building high-performance web applications and algorithmic systems. Combining full-stack MERN engineering with algorithmic rigor in C++ to design scalable, user-centric software.',
+  experiences: [
+    {
+      id: 'gcp-arcade-facilitator',
+      role: 'Google Cloud Arcade Facilitator & Arcade Labs Participant',
+      organization: 'Google Cloud Skills Boost / Google Developer Program',
+      duration: 'Jun 2026 – Present',
+      location: 'Active Participant • India',
+      status: 'Active Participant',
+      highlights: [
+        'Actively participating in Google Cloud Arcade and Arcade Labs, gaining hands-on experience with Google Cloud technologies.',
+        'Earned 9 Google Developer Program badges through hands-on labs, quests, and technical challenges.',
+        'Strengthening practical skills in cloud computing, deployment, and modern developer tools through project-based learning.',
+      ],
+      skills: ['Cloud Computing', 'Google Cloud (GCP)', 'Cloud Storage & IAM', '9 Developer Badges'],
+    },
+  ],
 };

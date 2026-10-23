@@ -15,12 +15,12 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="w-full lg:w-[320px] shrink-0">
-      <div className="glass-panel p-6 sm:p-7 rounded-2xl sticky top-24 space-y-6 glow-card">
+    <aside className="w-full lg:w-[320px] xl:w-[340px] shrink-0 self-stretch">
+      <div className="glass-panel p-5 sm:p-6 rounded-2xl sticky top-20 space-y-4 sm:space-y-5 glow-card max-h-[calc(100vh-5.5rem)] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {/* Profile Avatar & Status */}
         <div className="flex flex-col items-center text-center">
-          <div className="relative mb-4 group">
-            <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-cyan-500/40 p-1 bg-slate-900 shadow-lg shadow-cyan-500/10">
+          <div className="relative mb-3 group">
+            <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-cyan-500/40 p-1 bg-slate-900 shadow-lg shadow-cyan-500/10">
               <img
                 src={profileData.avatar}
                 alt={profileData.name}

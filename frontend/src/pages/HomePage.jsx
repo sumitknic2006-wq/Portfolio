@@ -18,8 +18,8 @@ export default function HomePage() {
 
       {/* Main Central Presentation */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex flex-col xl:flex-row items-start gap-8 lg:gap-10">
-          {/* Day09 Profile Sidebar (Sticky on XL screens) */}
+        <div className="flex flex-col lg:flex-row items-stretch gap-8 lg:gap-10 relative">
+          {/* Day09 Profile Sidebar (Sticky on desktop) */}
           <Sidebar />
 
           {/* Core Content Feed */}

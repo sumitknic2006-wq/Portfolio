@@ -1,27 +1,39 @@
+import { env } from '../config/env.js';
+
 /**
- * Centralized Error Handling Middleware
+ * Centralized Application Error Handling Middleware
+ * Ensures safe responses in production without exposing sensitive internals
  */
 export function errorHandler(err, req, res, next) {
-  const statusCode = err.statusCode || res.statusCode >= 400 ? res.statusCode : 500;
-  
-  console.error(`[Error] ${req.method} ${req.originalUrl} - ${err.message}`);
-  if (process.env.NODE_ENV === 'development') {
-    console.error(err.stack);
+  const statusCode = err.statusCode || (res.statusCode >= 400 ? res.statusCode : 500);
+
+  // Safe logging in server output (avoid logging private credentials/payloads)
+  if (!env.isTest) {
+    console.error(`[Error] ${req.method} ${req.originalUrl} - ${err.message}`);
+    if (env.isDevelopment && err.stack) {
+      console.error(err.stack);
+    }
   }
 
-  res.status(statusCode).json({
+  const response = {
     success: false,
-    message: err.message || 'Internal Server Error',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }),
-  });
+    error: {
+      message: err.isOperational || env.isDevelopment
+        ? err.message
+        : 'An unexpected internal server error occurred',
+    },
+  };
+
+  if (err.code) {
+    response.error.code = err.code;
+  }
+
+  // Only expose stack trace in non-production environments
+  if (env.isDevelopment && err.stack) {
+    response.error.stack = err.stack;
+  }
+
+  return res.status(statusCode).json(response);
 }
 
-/**
- * 404 Route Not Found Middleware
- */
-export function notFoundHandler(req, res, next) {
-  res.status(404).json({
-    success: false,
-    message: `API Route not found: ${req.method} ${req.originalUrl}`,
-  });
-}
+export default errorHandler;

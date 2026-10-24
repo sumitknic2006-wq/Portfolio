@@ -1,8 +1,11 @@
 import mongoose from 'mongoose';
+import { env } from '../config/env.js';
+import { sendSuccess } from '../utils/apiResponse.js';
 
 /**
  * Health Check Controller
  * Verifies server availability and provides runtime diagnostics
+ * Honestly reports MongoDB connection state (does not claim connected when disconnected)
  */
 export function getHealthStatus(req, res) {
   const dbStates = {
@@ -12,18 +15,23 @@ export function getHealthStatus(req, res) {
     3: 'disconnecting',
   };
 
-  const dbStatus = dbStates[mongoose.connection.readyState] || 'unknown';
+  const dbState = mongoose.connection.readyState;
+  const dbStatus = dbStates[dbState] || 'disconnected';
 
-  res.status(200).json({
-    success: true,
+  const healthData = {
     status: 'healthy',
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || 'development',
+    environment: env.NODE_ENV,
     uptimeSeconds: Math.floor(process.uptime()),
     database: {
       status: dbStatus,
-      connected: mongoose.connection.readyState === 1,
+      connected: dbState === 1,
+      mode: dbState === 1 ? 'persistent' : 'phase3_standalone_fixtures',
     },
     version: '1.0.0',
-  });
+  };
+
+  return sendSuccess(res, healthData, 'Server is operational and healthy');
 }
+
+export default getHealthStatus;

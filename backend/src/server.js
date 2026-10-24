@@ -1,19 +1,15 @@
-import dotenv from 'dotenv';
 import app from './app.js';
+import { env } from './config/env.js';
 import { connectDB, disconnectDB } from './config/db.js';
 
-// Load environment variables
-dotenv.config();
-
-const PORT = process.env.PORT || 5001;
-
 async function startServer() {
-  // Connect to database if URI provided
+  // In Phase 3: Connect to MongoDB only if explicitly configured; runs gracefully disconnected otherwise
   await connectDB();
 
-  const server = app.listen(PORT, () => {
-    console.log(`🚀 [Server] Backend running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-    console.log(`🩺 [Server] Health check: http://localhost:${PORT}/health`);
+  const server = app.listen(env.PORT, () => {
+    console.log(`🚀 [Server] Backend running in ${env.NODE_ENV} mode on port ${env.PORT}`);
+    console.log(`🩺 [Server] Health check: http://localhost:${env.PORT}/health`);
+    console.log(`📚 [Server] API base route: http://localhost:${env.PORT}/api/v1`);
   });
 
   // Graceful shutdown handling

@@ -130,18 +130,19 @@ backend/
 
 All resource endpoints are versioned under `/api/v1`:
 
-| Method | Endpoint | Description | Phase Planned |
+| Method | Endpoint | Description | Phase Status |
 | :--- | :--- | :--- | :--- |
-| `GET` | `/health` | Diagnostic server health check & DB status | Phase 1 (Active) |
-| `GET` | `/api/v1/health` | Versioned health diagnostic check | Phase 1 (Active) |
-| `GET` | `/api/v1/profile` | Sumit Kumar profile data & academic bio | Phase 2 |
-| `GET` | `/api/v1/skills` | Categorized technical skill registry | Phase 2 |
-| `GET` | `/api/v1/projects` | Full project catalog with filters | Phase 2 |
-| `GET` | `/api/v1/projects/:slug` | Deep-dive project architecture details | Phase 2 |
-| `GET` | `/api/v1/achievements` | Badges, Hackathon entries, Cloud Arcade | Phase 2 |
-| `GET` | `/api/v1/dsa` | Curated C++ algorithmic solutions catalog | Phase 3 |
-| `POST` | `/api/v1/contact` | Validated contact form submission | Phase 3 |
-| `POST` | `/api/v1/assistant` | Grounded portfolio conversational query | Phase 4 |
+| `GET` | `/health` | Diagnostic server health check & DB status | Active |
+| `GET` | `/api/v1/health` | Versioned health diagnostic check & telemetry | Active (Phase 3 Implemented) |
+| `GET` | `/api/v1/profile` | Sumit Kumar verified profile data & academic bio | Active (Phase 3 Implemented) |
+| `GET` | `/api/v1/skills` | Categorized technical skill registry (?category=) | Active (Phase 3 Implemented) |
+| `GET` | `/api/v1/projects` | Full project catalog with category filtering | Active (Phase 3 Implemented) |
+| `GET` | `/api/v1/projects/:slug` | Deep-dive project architecture details & 404 | Active (Phase 3 Implemented) |
+| `GET` | `/api/v1/achievements` | Badges, Hackathon entries, Cloud Arcade | Active (Phase 3 Implemented) |
+| `GET` | `/api/v1/education` | B.Tech CSE & Google Cloud Arcade Experience | Active (Phase 3 Implemented) |
+| `GET` | `/api/v1/coding-profiles` | Verified GitHub & LeetCode links & stats | Active (Phase 3 Implemented) |
+| `POST` | `/api/v1/contact` | Validated contact form submission (Zod, Rate Limiter) | Active (Phase 3 Implemented; 503 until Phase 4 DB) |
+| `POST` | `/api/v1/assistant` | Grounded portfolio conversational query | Phase 5 |
 
 ---
 

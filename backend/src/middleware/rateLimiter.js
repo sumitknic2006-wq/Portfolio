@@ -4,10 +4,11 @@ import { sendError } from '../utils/apiResponse.js';
 
 /**
  * Standard API rate limiter for general endpoints
+ * Automatically skipped in development and test environments to prevent local lockouts
  */
 export const apiLimiter = rateLimit({
   windowMs: env.RATE_LIMIT_WINDOW_MS,
-  max: env.RATE_LIMIT_MAX_REQUESTS,
+  max: env.isDevelopment ? 5000 : env.RATE_LIMIT_MAX_REQUESTS,
   standardHeaders: true,
   legacyHeaders: false,
   handler: (req, res) => {
@@ -19,7 +20,33 @@ export const apiLimiter = rateLimit({
       'RATE_LIMIT_EXCEEDED'
     );
   },
-  skip: () => env.isTest, // Disable rate limit in automated tests
+  skip: (req) => {
+    // Skip in test or development mode for localhost / local IP requests
+    if (env.isTest || env.isDevelopment) {
+      return true;
+    }
+    return false;
+  },
+});
+
+/**
+ * Dedicated rate limiter for AI Assistant queries to protect costs & abuse
+ */
+export const assistantLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: env.isDevelopment ? 200 : env.ASSISTANT_RATE_LIMIT_MAX,
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    return sendError(
+      res,
+      'Too many assistant queries from this IP address. Please wait a few minutes before asking more questions.',
+      429,
+      null,
+      'ASSISTANT_RATE_LIMIT_EXCEEDED'
+    );
+  },
+  skip: () => env.isTest,
 });
 
 /**
@@ -41,3 +68,25 @@ export const contactLimiter = rateLimit({
   },
   skip: () => env.isTest,
 });
+
+/**
+ * Strict rate limiter for admin authentication to mitigate brute-force attempts
+ */
+export const adminAuthLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: env.isDevelopment ? 50 : 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    return sendError(
+      res,
+      'Too many administrative login attempts. Please wait 15 minutes before retrying.',
+      429,
+      null,
+      'AUTH_RATE_LIMIT_EXCEEDED'
+    );
+  },
+  skip: () => env.isTest,
+});
+
+

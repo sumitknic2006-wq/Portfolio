@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import { ThemeProvider } from './context/ThemeContext.jsx';
 import { LanguageProvider } from './context/LanguageContext.jsx';
+import { ProfileProvider } from './context/ProfileContext.jsx';
+import { AdminAuthProvider } from './context/AdminAuthContext.jsx';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -11,7 +13,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ThemeProvider>
         <LanguageProvider>
-          <App />
+          <ProfileProvider>
+            <AdminAuthProvider>
+              <App />
+            </AdminAuthProvider>
+          </ProfileProvider>
         </LanguageProvider>
       </ThemeProvider>
     </BrowserRouter>

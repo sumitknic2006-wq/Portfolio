@@ -32,7 +32,7 @@ export default function BackToTop() {
       type="button"
       onClick={scrollToTop}
       aria-label={t('footer.backToTop')}
-      className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25 hover:bg-cyan-400 hover:scale-105 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+      className="fixed bottom-20 right-6 z-40 p-3 rounded-full bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25 hover:bg-cyan-400 hover:scale-105 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
       title={t('footer.backToTop')}
     >
       <ArrowUp className="w-5 h-5 font-bold stroke-[2.5]" />

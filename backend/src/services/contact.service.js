@@ -1,10 +1,9 @@
-import mongoose from 'mongoose';
+import { getDbStatus } from '../config/db.js';
+import { contactRepository } from '../repositories/contact.repository.js';
+import { emailService } from './email.service.js';
 
-/**
- * Custom Error for Service Availability Constraints
- */
 export class ServiceUnavailableError extends Error {
-  constructor(message) {
+  constructor(message = 'Service unavailable') {
     super(message);
     this.name = 'ServiceUnavailableError';
     this.statusCode = 503;
@@ -14,37 +13,82 @@ export class ServiceUnavailableError extends Error {
 }
 
 /**
- * Contact Service Layer
+ * Contact Service Layer for Phase 4 & Phase 9
  * 
- * In Phase 3:
- * Rejects fake successes. Because MongoDB is not connected and email transport
- * is not configured, this service returns a strictly honest 503 Service Unavailable
- * response.
- * 
- * In Phase 4:
- * When MongoDB is connected, messages will be saved into the ContactMessage collection
- * and dispatched to the configured administrator inbox.
+ * Persists validated contact inquiries into MongoDB ContactMessage collection.
+ * Triggers instant email notification to the admin with graceful fallback if the email provider fails or is unconfigured.
+ * Enforces strict resilience: returns success once database write succeeds.
  */
 export const contactService = {
-  isConfigured() {
-    // Phase 3: MongoDB is intentionally not connected.
-    const isDbConnected = mongoose.connection.readyState === 1;
-    const hasEmailApiKey = Boolean(process.env.RESEND_API_KEY);
-    return isDbConnected && hasEmailApiKey;
-  },
-
   async handleInquiry(inquiryData) {
-    // Strict Honesty Check: Do NOT fake message delivery or storage
-    if (!this.isConfigured()) {
+    const dbStatus = getDbStatus();
+
+    // Verify MongoDB connection is active
+    if (!dbStatus.connected) {
       throw new ServiceUnavailableError(
-        'Contact inquiry received and validated, but persistent storage and message delivery are currently offline in Phase 3. Live transmission will be enabled upon MongoDB connection in Phase 4.'
+        'Database connection is currently offline. Your message could not be stored. Please reach out directly to sumitknic2006@gmail.com.'
       );
     }
 
-    // Planned Phase 4 logic:
-    // const message = await ContactMessage.create(inquiryData);
-    // await sendEmailNotification(inquiryData);
-    // return { id: message._id, status: 'delivered' };
+    try {
+      // 1. Persist validated message into MongoDB first
+      const saved = await contactRepository.create({
+        name: inquiryData.name,
+        email: inquiryData.email,
+        subject: inquiryData.subject || 'General Portfolio Inquiry',
+        message: inquiryData.message,
+        ipAddress: inquiryData.ipAddress,
+        userAgent: inquiryData.userAgent,
+        status: 'pending',
+      });
+
+      // 2. Dispatch email notification asynchronously with graceful fallback
+      let emailResult = { sent: false, note: 'Notification pending or provider unconfigured' };
+      try {
+        emailResult = await emailService.sendContactNotification({
+          id: saved._id,
+          name: saved.name,
+          email: saved.email,
+          subject: saved.subject,
+          message: saved.message,
+          createdAt: saved.createdAt,
+        });
+
+        // Record notification status safely in MongoDB
+        if (emailResult.sent) {
+          await contactRepository.updateById(saved._id, {
+            notificationSent: true,
+            notificationError: null,
+          });
+        } else if (emailResult.error) {
+          await contactRepository.updateById(saved._id, {
+            notificationSent: false,
+            notificationError: String(emailResult.error).slice(0, 500),
+          });
+        }
+      } catch (emailErr) {
+        // Safe logging: log error message without private email content or credentials
+        console.warn(`[ContactService] Non-fatal notification failure for msg ${saved._id}: ${emailErr.message}`);
+        await contactRepository.updateById(saved._id, {
+          notificationSent: false,
+          notificationError: String(emailErr.message).slice(0, 500),
+        }).catch(() => {});
+      }
+
+      // 3. Format response confirming database persistence
+      return {
+        id: saved._id,
+        status: 'stored_successfully',
+        createdAt: saved.createdAt,
+        notificationDispatched: emailResult.sent,
+        note: emailResult.sent
+          ? 'Message saved and instant admin notification dispatched.'
+          : 'Message saved securely in database. Admin notification queued.',
+      };
+    } catch (error) {
+      console.error(`[ContactService] Failed to persist message: ${error.message}`);
+      throw error;
+    }
   },
 };
 

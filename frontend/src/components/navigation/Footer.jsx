@@ -1,11 +1,13 @@
 import React from 'react';
-import { ArrowUp, Terminal } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowUp, Terminal, Shield } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext.jsx';
-import { profileData } from '../../data/profileData.js';
+import { useProfile } from '../../context/ProfileContext.jsx';
 import SocialLinks from '../common/SocialLinks.jsx';
 
 export default function Footer() {
   const { t } = useLanguage();
+  const { profile: profileData } = useProfile();
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
@@ -71,8 +73,18 @@ export default function Footer() {
           </button>
         </div>
 
-        <div className="mt-8 pt-4 text-center text-xs text-slate-500 font-mono">
-          &copy; {currentYear} {profileData.name}. {t('footer.rights')}
+        <div className="mt-8 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 font-mono">
+          <div>
+            &copy; {currentYear} {profileData.name}. {t('footer.rights')}
+          </div>
+          <Link
+            to="/admin/login"
+            className="inline-flex items-center gap-1.5 text-slate-500 hover:text-cyan-400 transition-colors"
+            title="Portfolio Admin Portal"
+          >
+            <Shield className="w-3.5 h-3.5" />
+            <span>Admin Portal</span>
+          </Link>
         </div>
       </div>
     </footer>

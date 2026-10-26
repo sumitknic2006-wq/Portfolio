@@ -1,11 +1,12 @@
 import React from 'react';
 import { User, BookOpen, Compass, Target, MapPin, GraduationCap, Sparkles } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext.jsx';
-import { profileData } from '../data/profileData.js';
+import { useProfile } from '../context/ProfileContext.jsx';
 import SectionHeading from '../components/common/SectionHeading.jsx';
 
 export default function AboutSection() {
   const { t } = useLanguage();
+  const { profile: profileData } = useProfile();
 
   const infoBadges = [
     { label: t('about.collegeLabel'), value: profileData.university, icon: GraduationCap },

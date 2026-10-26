@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/navigation/Navbar.jsx';
 import Footer from '../components/navigation/Footer.jsx';
 import BackToTop from '../components/common/BackToTop.jsx';
+import { PortfolioAssistant } from '../features/portfolio-assistant/index.js';
 
 export default function MainLayout({ children }) {
   return (
@@ -12,6 +13,7 @@ export default function MainLayout({ children }) {
       </main>
       <Footer />
       <BackToTop />
+      <PortfolioAssistant />
     </div>
   );
 }

@@ -1,7 +1,18 @@
-import test from 'node:test';
+import test, { before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import request from 'supertest';
+import mongoose from 'mongoose';
 import app from '../src/app.js';
+import { setupTestDB, teardownTestDB, clearTestDB } from './helpers/dbTestHelper.js';
+import ContactMessage from '../src/models/ContactMessage.js';
+
+before(async () => {
+  await setupTestDB();
+});
+
+after(async () => {
+  await teardownTestDB();
+});
 
 test('POST /api/v1/contact rejects empty payload with 400 validation error', async () => {
   const response = await request(app).post('/api/v1/contact').send({});
@@ -54,16 +65,53 @@ test('POST /api/v1/contact rejects unexpected fields (mass assignment prevention
   assert.equal(response.body.error.code, 'VALIDATION_ERROR');
 });
 
-test('POST /api/v1/contact with valid payload returns 503 Service Unavailable in Phase 3', async () => {
-  const response = await request(app).post('/api/v1/contact').send({
+test('POST /api/v1/contact persists valid message to MongoDB and returns 201 Created', async () => {
+  const testPayload = {
     name: 'Recruiter User',
     email: 'recruiter@techcorp.com',
     message: 'We reviewed your developer portfolio and would like to discuss a software engineering opportunity.',
+  };
+
+  const response = await request(app).post('/api/v1/contact').send(testPayload);
+
+  assert.equal(response.status, 201);
+  assert.equal(response.body.success, true);
+  assert.ok(response.body.message.includes('successfully'));
+  assert.ok(response.body.data.id);
+  assert.equal(response.body.data.status, 'stored_successfully');
+  assert.ok(response.body.data.createdAt);
+
+  // Verify write was actually committed to MongoDB
+  const savedDoc = await ContactMessage.findById(response.body.data.id);
+  assert.ok(savedDoc);
+  assert.equal(savedDoc.name, testPayload.name);
+  assert.equal(savedDoc.email, testPayload.email);
+  assert.equal(savedDoc.message, testPayload.message);
+  assert.equal(savedDoc.status, 'pending');
+});
+
+test('POST /api/v1/contact returns 503 when database is disconnected', async () => {
+  // Temporarily disconnect mongoose
+  await mongoose.disconnect();
+
+  const response = await request(app).post('/api/v1/contact').send({
+    name: 'Recruiter User',
+    email: 'recruiter@techcorp.com',
+    message: 'Testing database offline behavior for service availability.',
   });
 
-  // Strict requirement: Never report fake successful delivery or fake persistence!
   assert.equal(response.status, 503);
   assert.equal(response.body.success, false);
   assert.equal(response.body.error.code, 'SERVICE_UNAVAILABLE');
-  assert.ok(response.body.error.message.includes('offline in Phase 3'));
+  assert.ok(response.body.error.message.includes('offline'));
+
+  // Reconnect for teardown or subsequent hooks
+  await setupTestDB();
+});
+
+test('GET /api/v1/contact does not expose stored messages publicly (404/Not Allowed)', async () => {
+  const response = await request(app).get('/api/v1/contact');
+  // There is no public GET endpoint for contact messages
+  assert.equal(response.status, 404);
+  assert.equal(response.body.success, false);
 });

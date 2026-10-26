@@ -1,9 +1,19 @@
-import test from 'node:test';
+import test, { before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import request from 'supertest';
 import app from '../src/app.js';
+import { setupTestDB, seedTestDB, teardownTestDB } from './helpers/dbTestHelper.js';
 
-test('GET /api/v1/projects returns 200 with list of verified projects', async () => {
+before(async () => {
+  await setupTestDB();
+  await seedTestDB();
+});
+
+after(async () => {
+  await teardownTestDB();
+});
+
+test('GET /api/v1/projects returns 200 with list of verified projects from MongoDB', async () => {
   const response = await request(app).get('/api/v1/projects');
 
   assert.equal(response.status, 200);

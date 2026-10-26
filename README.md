@@ -15,12 +15,14 @@ This repository contains a full-stack web application designed with a dark navy 
 - **Icons**: Lucide React
 - **Motion & Transitions**: Framer Motion
 - **Routing**: React Router v7
+- **API Client**: Service layer with timeout control, normalized error mapping, and loading/error states
 
 ### Backend
 - **Runtime**: Node.js (v20+)
 - **Framework**: Express.js (ES Modules)
 - **Database**: MongoDB with Mongoose ODM (MongoDB Atlas in production)
 - **Testing**: Node.js Native Test Runner (`node:test`) + Supertest
+- **Integration**: Full-stack REST integration across all portfolio sections and contact persistence
 
 ---
 
@@ -133,6 +135,13 @@ npm run dev
 ```
 The API server will be live at: **`http://localhost:5001`**
 Health check endpoint: **`http://localhost:5001/health`**
+AI Assistant status: **`http://localhost:5001/api/v1/assistant/status`**
+AI Assistant chat: **`POST http://localhost:5001/api/v1/assistant/chat`**
+
+To activate live Google Gemini responses for the AI Portfolio Assistant:
+1. Get an API key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+2. Set `AI_API_KEY=your_key` in `backend/.env`.
+3. Restart backend. Without an API key, the assistant transparently informs visitors and uses verified local portfolio knowledge fallback.
 
 ---
 
@@ -150,10 +159,16 @@ cd frontend && npm run build
 cd frontend && npm run preview
 ```
 
-### Backend Verification
+### Backend Verification & Seeding
 ```bash
-# Run health check & API test suite
+# Run automated backend test suite (isolated in-memory MongoDB)
 cd backend && npm test
+
+# Validate seed data dry-run
+cd backend && npm run seed:dry
+
+# Populate database with verified portfolio records
+cd backend && npm run seed
 ```
 
 ---
@@ -165,16 +180,57 @@ cd backend && npm test
 2. Set Root Directory to `frontend`.
 3. Framework Preset: **Vite**.
 4. Configure Build Command: `npm run build` and Output Directory: `dist`.
-5. Set environment variable: `VITE_API_BASE_URL` pointing to the deployed backend URL.
+5. Set environment variable in Vercel Dashboard: `VITE_API_BASE_URL` pointing to the deployed backend URL (e.g., `https://sumit-portfolio-api.onrender.com/api/v1`).
+6. SPA route rewrites are pre-configured in `frontend/vercel.json`.
 
-### Backend Deployment (Node Platform)
+### Backend Deployment (Render / Railway / Cloud Host)
 1. Deploy `backend` to a Node-compatible host (e.g. Render, Railway, or VPS).
 2. Configure environment variables in the host dashboard:
    - `NODE_ENV=production`
-   - `PORT=5001` (or host-provided port)
+   - `PORT=5001` (or host-assigned port)
    - `CLIENT_ORIGIN=https://<your-vercel-domain>.vercel.app`
-   - `MONGODB_URI=mongodb+srv://<user>:<password>@cluster0.mongodb.net/sumit_portfolio`
+   - `MONGODB_URI=mongodb+srv://<user>:<password>@cluster0.mongodb.net/sumit_portfolio?retryWrites=true&w=majority`
+   - `JWT_SECRET=<strong_random_secret_at_least_32_chars>`
+   - `JWT_EXPIRES_IN=7d`
+   - `ADMIN_EMAIL=sumitknic2006@gmail.com`
+   - `ADMIN_DEFAULT_PASSWORD=<strong_admin_password>`
+   - `APP_URL=https://<your-vercel-domain>.vercel.app`
+   - `RESEND_API_KEY=<your_resend_api_key>` (Optional for transactional notifications)
+   - `EMAIL_FROM=Portfolio Contact <notifications@yourdomain.com>`
+   - `CONTACT_RECEIVER_EMAIL=sumitknic2006@gmail.com`
+   - `AI_PROVIDER=gemini`
+   - `AI_API_KEY=<your_gemini_api_key>`
+   - `AI_MODEL=gemini-3.5-flash-lite`
+   - `AI_TIMEOUT_MS=60000`
 3. Configure Health Check path to `/health`.
+4. Run `npm run seed` once to verify database collection documents if empty.
+5. Run `npm run admin:setup` to seed or initialize your superadmin account securely.
+
+---
+
+## 🔒 Phase 9 — Secure Admin Dashboard & Instant Notifications
+
+- **Admin Login Route**: `/admin/login` (Protected dashboard at `/admin/dashboard`).
+- **Server-Side Authentication**: Session-based HttpOnly JWT cookies + Bearer token support.
+- **Brute-Force Protection**: Dedicated rate limiter (`adminAuthLimiter`) on login attempts.
+- **Initial Setup CLI**: `npm run admin:setup` creates/updates the admin credentials securely via terminal; no public registration endpoint exists.
+- **Dashboard Overview**: Aggregated counts directly from MongoDB (`total`, `unread`, `pending`, `replied`, `archived`).
+- **Contact Inbox**: Complete inbox supporting search, status filtering, read/unread toggling, full message modal, and deletion confirmation dialog.
+- **Instant Email Notifications**: Resend integration sends formatted notifications to the configured admin inbox with visitor `Reply-To`.
+- **Fault Resilience**: Database write is confirmed and preserved first; email dispatch failures never lose contact submissions.
+- **Reply Workflow**: Supports one-click native email client reply (`mailto:`) and in-app authenticated Resend dispatch.
+
+---
+
+## 🔒 Security & Performance Audit (Phase 8)
+
+- **Dependencies**: 0 vulnerabilities found via `npm audit` across both frontend and backend.
+- **Rollup Chunking**: Optimized manual chunking in `vite.config.js` (`vendor-react`, `vendor-motion`, `vendor-icons`), keeping all chunks under 400kB.
+- **Security Headers**: Helmet enabled on all HTTP responses with cross-origin resource policies.
+- **CORS Protection**: Origin-checked middleware enforcing strict domain whitelisting.
+- **Input Validation**: Strict Zod schemas on all inbound payloads with mass-assignment protection.
+- **SEO & Metadata**: Search engine discovery with `robots.txt`, `sitemap.xml`, OpenGraph tags, and Twitter summary cards.
+- **Telemetry Protection**: Internal IP addresses and user agents stored with `select: false` in Mongoose.
 
 ---
 

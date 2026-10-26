@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Terminal, Menu, X, ArrowUpRight } from 'lucide-react';
+import { Terminal, Menu, X, ArrowUpRight, Shield } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext.jsx';
 import ThemeToggle from '../common/ThemeToggle.jsx';
 import LanguageToggle from '../common/LanguageToggle.jsx';
-import { profileData } from '../../data/profileData.js';
+import { useProfile } from '../../context/ProfileContext.jsx';
 
 export default function Navbar() {
   const { t } = useLanguage();
+  const { profile: profileData } = useProfile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const location = useLocation();
@@ -97,8 +98,17 @@ export default function Navbar() {
           <LanguageToggle />
           <ThemeToggle />
 
+          <Link
+            to="/admin/login"
+            title="Admin Portal"
+            className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-slate-700 transition-colors"
+          >
+            <Shield className="w-4 h-4" />
+          </Link>
+
           <a
             href={profileData.resumeUrl}
+            download="Sumit_Kumar_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all shadow-sm"
@@ -153,6 +163,7 @@ export default function Navbar() {
           <div className="pt-2 flex flex-col gap-2">
             <a
               href={profileData.resumeUrl}
+              download="Sumit_Kumar_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold bg-cyan-500/10 border border-cyan-500/30 text-cyan-300"
@@ -166,6 +177,14 @@ export default function Navbar() {
             >
               {t('nav.contactMe')}
             </a>
+            <Link
+              to="/admin/login"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full inline-flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-mono text-slate-400 hover:text-white bg-slate-900 border border-slate-800"
+            >
+              <Shield className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Admin Portal</span>
+            </Link>
           </div>
         </div>
       )}

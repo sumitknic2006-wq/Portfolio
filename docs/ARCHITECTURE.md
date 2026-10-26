@@ -132,17 +132,18 @@ All resource endpoints are versioned under `/api/v1`:
 
 | Method | Endpoint | Description | Phase Status |
 | :--- | :--- | :--- | :--- |
-| `GET` | `/health` | Diagnostic server health check & DB status | Active |
-| `GET` | `/api/v1/health` | Versioned health diagnostic check & telemetry | Active (Phase 3 Implemented) |
-| `GET` | `/api/v1/profile` | Sumit Kumar verified profile data & academic bio | Active (Phase 3 Implemented) |
-| `GET` | `/api/v1/skills` | Categorized technical skill registry (?category=) | Active (Phase 3 Implemented) |
-| `GET` | `/api/v1/projects` | Full project catalog with category filtering | Active (Phase 3 Implemented) |
-| `GET` | `/api/v1/projects/:slug` | Deep-dive project architecture details & 404 | Active (Phase 3 Implemented) |
-| `GET` | `/api/v1/achievements` | Badges, Hackathon entries, Cloud Arcade | Active (Phase 3 Implemented) |
-| `GET` | `/api/v1/education` | B.Tech CSE & Google Cloud Arcade Experience | Active (Phase 3 Implemented) |
-| `GET` | `/api/v1/coding-profiles` | Verified GitHub & LeetCode links & stats | Active (Phase 3 Implemented) |
-| `POST` | `/api/v1/contact` | Validated contact form submission (Zod, Rate Limiter) | Active (Phase 3 Implemented; 503 until Phase 4 DB) |
-| `POST` | `/api/v1/assistant` | Grounded portfolio conversational query | Phase 5 |
+| `GET` | `/health` | Diagnostic server health check & DB status | Active (Phase 4 MongoDB Aware) |
+| `GET` | `/api/v1/health` | Versioned health diagnostic check & telemetry | Active (Phase 4 MongoDB Aware) |
+| `GET` | `/api/v1/profile` | Sumit Kumar verified profile data & academic bio | Active (Phase 4 MongoDB Connected) |
+| `GET` | `/api/v1/skills` | Categorized technical skill registry (?category=) | Active (Phase 4 MongoDB Connected) |
+| `GET` | `/api/v1/projects` | Full project catalog with category filtering | Active (Phase 4 MongoDB Connected) |
+| `GET` | `/api/v1/projects/:slug` | Deep-dive project architecture details & 404 | Active (Phase 4 MongoDB Connected) |
+| `GET` | `/api/v1/achievements` | Badges, Hackathon entries, Cloud Arcade | Active (Phase 4 MongoDB Connected) |
+| `GET` | `/api/v1/education` | B.Tech CSE & Google Cloud Arcade Experience | Active (Phase 4 MongoDB Connected) |
+| `GET` | `/api/v1/coding-profiles` | Verified GitHub & LeetCode links & stats | Active (Phase 4 MongoDB Connected) |
+| `POST` | `/api/v1/contact` | Validated contact form submission (persisted to MongoDB) | Active (Phase 4 MongoDB Persisted, 201 Created) |
+| `POST` | `/api/v1/assistant/chat` | Grounded AI conversation using verified portfolio facts | Active (Phase 7 Real AI Integration) |
+| `GET` | `/api/v1/assistant/status` | Safe AI provider status probe without credential exposure | Active (Phase 7 Real AI Integration) |
 
 ---
 

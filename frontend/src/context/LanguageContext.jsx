@@ -22,10 +22,12 @@ export function LanguageProvider({ children }) {
    * Helper function to retrieve nested translated string
    * e.g. t('hero.greeting') -> "Hi, I'm" / "नमस्ते, मैं हूँ"
    */
-  const t = (path) => {
+  const t = (path, params = {}) => {
     if (!path) return '';
     const keys = path.split('.');
     let current = translations[language];
+    let resolved = null;
+
     for (const key of keys) {
       if (current && current[key] !== undefined) {
         current = current[key];
@@ -39,10 +41,22 @@ export function LanguageProvider({ children }) {
             return path;
           }
         }
-        return fallback;
+        resolved = fallback;
+        break;
       }
     }
-    return current;
+
+    if (resolved === null) {
+      resolved = current;
+    }
+
+    if (typeof resolved === 'string' && params && typeof params === 'object') {
+      return Object.entries(params).reduce((acc, [key, val]) => {
+        return acc.replaceAll(`{${key}}`, String(val));
+      }, resolved);
+    }
+
+    return resolved;
   };
 
   return (

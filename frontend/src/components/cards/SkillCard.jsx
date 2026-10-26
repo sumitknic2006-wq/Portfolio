@@ -38,22 +38,22 @@ export default function SkillCard({ category }) {
           {category.skills.map((skill) => (
             <li
               key={skill.name}
-              className="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/60 flex items-start justify-between gap-2"
+              className="p-3 rounded-xl bg-slate-900/60 border border-slate-800/60 hover:border-slate-700/80 transition-colors space-y-1.5"
             >
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                  <span className="text-xs font-semibold text-slate-200">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 min-w-0 flex-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                  <span className="text-xs sm:text-sm font-semibold text-slate-200">
                     {skill.name}
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-400 mt-0.5 pl-3.5">
-                  {skill.focus}
-                </p>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40 shrink-0 whitespace-nowrap">
+                  {skill.level}
+                </span>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40 shrink-0">
-                {skill.level}
-              </span>
+              <p className="text-[11px] text-slate-400 pl-3.5 leading-relaxed">
+                {skill.focus}
+              </p>
             </li>
           ))}
         </ul>

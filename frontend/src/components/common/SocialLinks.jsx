@@ -1,30 +1,33 @@
 import React from 'react';
 import { Github, Linkedin, Twitter, Code2 } from 'lucide-react';
-import { profileData } from '../../data/profileData.js';
+import { useProfile } from '../../context/ProfileContext.jsx';
 
 export default function SocialLinks({ className = '', showLabels = false }) {
+  const { profile: profileData } = useProfile();
+  const socials = profileData?.socials || {};
+
   const links = [
     {
       name: 'GitHub',
-      href: profileData.socials.github,
+      href: socials.github || 'https://github.com/sumitknic2006-wq',
       icon: Github,
       color: 'hover:text-white hover:border-slate-400 hover:bg-slate-800/80',
     },
     {
       name: 'LinkedIn',
-      href: profileData.socials.linkedin,
+      href: socials.linkedin || 'https://www.linkedin.com/in/sumit-kumar-45a154387/',
       icon: Linkedin,
       color: 'hover:text-sky-400 hover:border-sky-400 hover:bg-slate-800/80',
     },
     {
       name: 'X (Twitter)',
-      href: profileData.socials.twitter,
+      href: socials.twitter || 'https://x.com/Sumitkumar95862',
       icon: Twitter,
       color: 'hover:text-cyan-400 hover:border-cyan-400 hover:bg-slate-800/80',
     },
     {
       name: 'LeetCode',
-      href: profileData.socials.leetcode,
+      href: socials.leetcode || 'https://leetcode.com/u/25001122/',
       icon: Code2,
       color: 'hover:text-amber-400 hover:border-amber-400 hover:bg-slate-800/80',
     },

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Download, Check, Copy } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext.jsx';
-import { profileData } from '../data/profileData.js';
+import { useProfile } from '../context/ProfileContext.jsx';
 import SectionHeading from '../components/common/SectionHeading.jsx';
 import ContactForm from '../components/forms/ContactForm.jsx';
 import SocialLinks from '../components/common/SocialLinks.jsx';
 
 export default function ContactSection() {
   const { t } = useLanguage();
+  const { profile: profileData } = useProfile();
   const [copiedKey, setCopiedKey] = useState(null);
 
   const handleCopy = (text, key) => {
@@ -113,6 +114,7 @@ export default function ContactSection() {
               <div className="pt-4 border-t border-slate-800/80">
                 <a
                   href={profileData.resumeUrl}
+                  download="Sumit_Kumar_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs sm:text-sm font-semibold bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all shadow-sm"

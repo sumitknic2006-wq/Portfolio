@@ -7,6 +7,9 @@ import achievementsRoutes from './achievements.routes.js';
 import educationRoutes from './education.routes.js';
 import codingProfilesRoutes from './codingProfiles.routes.js';
 import contactRoutes from './contact.routes.js';
+import assistantRoutes from './assistant.routes.js';
+import adminRoutes from './admin.routes.js';
+import dsaRoutes from './dsa.routes.js';
 
 const router = Router();
 
@@ -21,7 +24,16 @@ router.use('/achievements', achievementsRoutes);
 router.use('/education', educationRoutes);
 router.use('/coding-profiles', codingProfilesRoutes);
 
+// DSA Explorer & Platform Trackers
+router.use('/dsa', dsaRoutes);
+
+// AI Portfolio Assistant
+router.use('/assistant', assistantRoutes);
+
 // Contact Inquiry Submission
 router.use('/contact', contactRoutes);
+
+// Secure Portfolio Admin Dashboard & Inbox
+router.use('/admin', adminRoutes);
 
 export default router;

@@ -15,6 +15,11 @@ export const contactSchema = z.object({
     .trim()
     .email({ message: 'A valid email address is required' })
     .max(255, { message: 'Email cannot exceed 255 characters' }),
+  subject: z
+    .string()
+    .trim()
+    .max(200, { message: 'Subject cannot exceed 200 characters' })
+    .optional(),
   message: z
     .string({ required_error: 'Message is required' })
     .trim()

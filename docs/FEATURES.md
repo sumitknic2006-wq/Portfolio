@@ -63,15 +63,16 @@ This document catalogs every planned capability, visual standard, interactive be
 
 ## C. Interactive Features
 
-- [x] **Responsive Mobile Navigation**: Collapsible drawer menu with hamburger toggle.
-- [ ] **Dynamic Project Filters** *(Phase 2)*: Filter projects by tag (Web, AI/ML, FinTech, DSA).
-- [ ] **Dark / Light Theme Switch** *(Phase 3)*: Persistent theme preference in localStorage.
-- [ ] **Hindi / English Language Switch** *(Phase 3)*: Localized strings for bilingual accessibility.
-- [ ] **Framer Motion Reveal Effects** *(Phase 2)*: Micro-interactions and viewport scroll animations.
-- [ ] **Live Coding Statistics** *(Phase 3)*: Display live LeetCode/GitHub stats when official APIs are reachable.
-- [ ] **Interactive DSA Explanations** *(Phase 3)*: Step-by-step logic viewer and visual complexity badges.
-- [ ] **AI Portfolio Assistant** *(Phase 4)*: Conversational assistant answering questions grounded solely in verified portfolio data.
-- [ ] **Contact Form Validation & Real Email Delivery** *(Phase 3)*: Server-side email delivery via Resend/Nodemailer.
+- [x] **Responsive Mobile Navigation**: Collapsible drawer menu with hamburger toggle, accessible aria attributes, and keyboard Escape support.
+- [x] **Project Search & Category Filtering** *(Phase 6 Verified)*: Combined keyword search (title, description, technology stack) with category filtering (All, Web Development, AI/ML, FinTech, DSA), result count telemetry, clear/reset action, and empty state.
+- [x] **Dark / Light Theme Switch** *(Phase 6 Verified)*: Persistent theme preference in localStorage with dark navy and curated light modes, complete with anti-flicker head script.
+- [x] **Hindi / English Language Switch** *(Phase 6 Verified)*: Complete centralized bilingual dictionary with parameter interpolation, covering all sections, forms, filters, and Project Detail pages.
+- [x] **Framer Motion Micro-Interactions**: Smooth card layout transitions, hover glow effects, drawer transitions, and full `prefers-reduced-motion` compliance.
+- [x] **Coding Profile Hub** *(Phase 6 Verified)*: Verified GitHub and LeetCode hub cards with graceful offline fallback without fabricated statistics.
+- [x] **Interactive DSA Explorer** *(Phase 6 Verified)*: Reusable C++ problem explorer supporting topic filters (Arrays, Strings, Two Pointers, Sliding Window, Recursion, Backtracking, Hashing), difficulty filters, and interactive step-by-step dry run simulations.
+- [x] **Real AI Portfolio Assistant** *(Phase 7 Completed)*: Full-stack AI Portfolio Assistant powered by official `@google/genai` SDK and current Gemini models. Features verified MongoDB context extraction, anti-prompt injection constraints, sources attribution tags, live thinking indicator, rate limiting (30 req/15m), and truthful unconfigured fallback.
+- [x] **Project Detail Experience** *(Phase 6 Verified)*: Bilingual project detail pages with architecture flow, problem/solution, features, challenges, and tech stack tags.
+- [x] **Contact Form Validation & Real Persistence**: Server-side validation, rate limiting, and 201 write-confirmed persistence to MongoDB.
 - [x] **PDF Resume Download**: Direct asset access from public distribution folder.
 - [x] **SEO Metadata & OpenGraph**: Complete metadata tags, social sharing cards, and search engine directives in `index.html`.
 
@@ -81,10 +82,10 @@ This document catalogs every planned capability, visual standard, interactive be
 
 - [x] **Express.js REST API**: Versioned route hierarchy mounted at `/api/v1`.
 - [x] **Health Check Endpoints**: Diagnostic probes at `/health` and `/api/v1/health`.
-- [x] **Mongoose ODM Integration**: Resilient connection manager with local development offline tolerance.
+- [x] **Mongoose ODM Integration**: Resilient connection manager with local development offline tolerance and MongoDB Atlas production readiness.
 - [x] **Centralized Error Handling**: Structured JSON error formatting and catch-all 404 handlers.
-- [ ] **Contact Submission Persistence** *(Phase 3)*: MongoDB collection with spam filtering and IP hashing.
-- [ ] **Validated Profile Endpoints** *(Phase 2)*: REST endpoints serving verified portfolio information.
+- [x] **Contact Submission Persistence** *(Phase 4 Completed)*: MongoDB collection with strict validation, rate limiting, and 201 Created write confirmation.
+- [x] **Validated Profile & Data Endpoints** *(Phase 4 Completed)*: REST endpoints querying MongoDB with repository pattern.
 - [x] **Strict Secret Segregation**: Dedicated `.env.example` templates and `.gitignore` guardrails.
 
 ---
@@ -95,7 +96,6 @@ This document catalogs every planned capability, visual standard, interactive be
 - [x] **Automated Testing Suite**: Backend health tests implemented using Node's native test runner (`node:test`) and Supertest.
 - [x] **Linting Configuration**: Modern ESLint flat config for React JavaScript code.
 - [x] **Production Bundle Validation**: Tested Vite production build generating clean optimized distribution chunks.
-- [ ] **GitHub Repository Setup**: Remote repository setup with initial branch protection.
-- [ ] **Vercel Frontend Deployment**: Automated CI/CD deployment with SPA route rewriting.
-- [ ] **Cloud Backend Deployment**: Hosted on Node platform (Render/Railway) connected to MongoDB Atlas.
-- [ ] **End-to-End Verification**: Complete verification of live forms, endpoints, and asset downloads.
+- [x] **Deployment Readiness (Vercel & Node Host)**: `vercel.json` SPA rewrites created, chunking optimized, environment templates secured, and production seed script validated.
+- [x] **SEO, Metadata & Accessibility**: Search-engine directives in `robots.txt` and `sitemap.xml`, OpenGraph and Twitter cards, semantic HTML, and responsive viewports verified.
+- [x] **End-to-End Functional QA**: Verified all endpoints, contact persistence, AI assistant multi-lingual interaction, and local storage state persistence.

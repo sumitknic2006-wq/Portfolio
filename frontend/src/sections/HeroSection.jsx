@@ -1,10 +1,11 @@
 import React from 'react';
 import { ArrowRight, Download, Mail, Github, Linkedin, Code2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext.jsx';
-import { profileData } from '../data/profileData.js';
+import { useProfile } from '../context/ProfileContext.jsx';
 
 export default function HeroSection() {
   const { t } = useLanguage();
+  const { profile: profileData } = useProfile();
 
   return (
     <section id="hero" className="relative py-16 sm:py-24 lg:py-28 overflow-hidden">
@@ -48,6 +49,7 @@ export default function HeroSection() {
 
               <a
                 href={profileData.resumeUrl}
+                download="Sumit_Kumar_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold glass-panel text-cyan-300 hover:text-white hover:border-cyan-400 transition-all hover:scale-105 active:scale-95"

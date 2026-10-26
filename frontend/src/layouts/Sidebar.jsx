@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, GraduationCap, Copy, Check, Download, ExternalLink } from 'lucide-react';
-import { profileData } from '../data/profileData.js';
+import { useProfile } from '../context/ProfileContext.jsx';
 import { useLanguage } from '../context/LanguageContext.jsx';
 import SocialLinks from '../components/common/SocialLinks.jsx';
 
 export default function Sidebar() {
   const { t } = useLanguage();
+  const { profile: profileData } = useProfile();
   const [copiedKey, setCopiedKey] = useState(null);
 
   const handleCopy = (text, key) => {
@@ -133,6 +134,7 @@ export default function Sidebar() {
         <div className="pt-2">
           <a
             href={profileData.resumeUrl}
+            download="Sumit_Kumar_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-semibold bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all shadow-sm"

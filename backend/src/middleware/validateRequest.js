@@ -29,4 +29,6 @@ export function validateRequestBody(schema) {
   };
 }
 
+export const validateRequest = validateRequestBody;
 export default validateRequestBody;
+

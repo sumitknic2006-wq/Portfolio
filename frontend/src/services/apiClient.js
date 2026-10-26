@@ -11,10 +11,11 @@
 
 const DEFAULT_API_BASE_URL = 'http://localhost:5001/api/v1';
 
-// Read API base URL and strip any trailing slash
-export const API_BASE_URL = (
-  import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL
-).replace(/\/+$/, '');
+// Read API base URL, strip trailing slash, and automatically ensure /api/v1 suffix
+const configuredUrl = (import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL).replace(/\/+$/, '');
+export const API_BASE_URL = configuredUrl.endsWith('/api/v1') 
+  ? configuredUrl 
+  : `${configuredUrl}/api/v1`;
 
 export class ApiError extends Error {
   constructor(message, status = 500, code = 'API_ERROR', details = null) {

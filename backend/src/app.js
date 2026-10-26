@@ -70,6 +70,9 @@ app.use('/health', healthRoutes);
 // 5. Versioned API routes with standard rate limiting
 app.use('/api/v1', apiLimiter, apiRouter);
 
+// Also mount apiRouter at root so requests like /skills, /projects work seamlessly
+app.use(apiLimiter, apiRouter);
+
 // 6. 404 Handler for unknown routes
 app.use(notFound);
 

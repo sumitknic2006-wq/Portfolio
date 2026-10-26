@@ -25,9 +25,15 @@ app.use(
       // Allow requests with no origin (e.g. mobile tools, curl, server-to-server tests)
       if (!origin) return callback(null, true);
 
+      const isAllowedVercel =
+        origin.endsWith('.vercel.app') ||
+        origin.includes('localhost') ||
+        origin.includes('127.0.0.1');
+
       if (
         env.ALLOWED_ORIGINS.includes(origin) ||
         origin === env.CLIENT_ORIGIN ||
+        isAllowedVercel ||
         env.isDevelopment ||
         env.isTest
       ) {
@@ -47,7 +53,18 @@ app.use(cookieParser());
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-// 4. Direct root health endpoint for infrastructure and load-balancer probes
+// 4. Root Welcome & Infrastructure health probes
+app.get('/', (_req, res) => {
+  res.json({
+    success: true,
+    message: 'Sumit Kumar Developer Portfolio API is online',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      api: '/api/v1',
+    },
+  });
+});
 app.use('/health', healthRoutes);
 
 // 5. Versioned API routes with standard rate limiting

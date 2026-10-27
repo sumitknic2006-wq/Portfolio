@@ -35,7 +35,7 @@ async function request(endpoint, {
   body = null,
   params = null,
   headers = {},
-  timeout = 8000,
+  timeout = 25000,
 } = {}) {
   // 1. Build target URL with optional query parameters
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;

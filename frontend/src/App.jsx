@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { API_BASE_URL } from './services/apiClient.js';
 import HomePage from './pages/HomePage.jsx';
 import ProjectDetailPage from './pages/ProjectDetailPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
@@ -11,6 +12,16 @@ import CodeforcesDashboardPage from './pages/CodeforcesDashboardPage.jsx';
 import DsaProblemDetailPage from './pages/DsaProblemDetailPage.jsx';
 
 export default function App() {
+  useEffect(() => {
+    // Non-blocking background warm-up ping for backend (Render)
+    try {
+      const healthUrl = `${API_BASE_URL.replace(/\/api\/v1\/?$/, '')}/health`;
+      fetch(healthUrl, { method: 'GET', credentials: 'omit' }).catch(() => {});
+    } catch (_) {
+      // Ignored non-critical ping
+    }
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />

@@ -275,7 +275,7 @@ export const devFixtures = {
       issuer: 'Google Cloud Skills Boost',
       category: 'Certifications',
       categoryTag: 'certifications',
-      date: '2024 – 2025',
+      date: '2026',
       badgeType: 'Facilitator & Skill Badges',
       description:
         'Earned hands-on skill badges covering Google Cloud fundamentals, Cloud Storage lifecycle configurations, IAM access policies, and serverless compute deployments on Google Cloud Platform.',
@@ -294,7 +294,7 @@ export const devFixtures = {
       issuer: 'University Hackathon Organization',
       category: 'Hackathons',
       categoryTag: 'hackathon',
-      date: '2024',
+      date: '2026',
       badgeType: 'Team Collaborator',
       description:
         'Participated in a multi-disciplinary AI sprint focused on rapid ideation and prototype development for practical automated solutions. Collaborated with peers on architecture design and frontend workflows.',
@@ -313,7 +313,7 @@ export const devFixtures = {
       issuer: 'Technical Student Community',
       category: 'Hackathons',
       categoryTag: 'hackathon',
-      date: '2024',
+      date: '2026',
       badgeType: 'Sprint Developer',
       description:
         'Engaged in intense 24-hour sprint challenge constructing responsive web tools under strict time and resource constraints. Implemented agile version control and modular CSS layout practices.',
@@ -332,7 +332,7 @@ export const devFixtures = {
       issuer: 'MERN Stack Developer Track',
       category: 'Learning Achievements',
       categoryTag: 'learning',
-      date: '2024',
+      date: '2026',
       badgeType: 'Certification of Completion',
       description:
         'Intensive immersion in full-stack architecture covering React component state lifecycles, Express routing, MongoDB document stores, and REST API testing standards.',
